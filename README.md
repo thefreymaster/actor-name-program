@@ -1,0 +1,23 @@
+# Actor Name Parser
+
+A program to parse string data into readable json objects
+
+## Getting Started
+
+### Install
+Install the required dependencies
+```
+npm install
+```
+
+### Run Program
+Run the program with the following script
+```
+npm run start
+```
+
+### Run Tests
+Run tests for program
+```
+npm run test
+```

@@ -91,19 +91,18 @@ const getTopTenFirstNames = (data: string[]) => {
   return firstNamesArr.slice(0, 10);
 };
 
-const getSpecificallyUnique = (data: string[], size: number) => data.slice(0, size)
+const getSpecificallyUnique = (data: string[], size: number) =>
+  data.slice(0, size);
 
 const getUniqueModified = (data: string[], size: number) => {
   const modified: string[] = [];
   data.map((name, index) => {
     const splitName = name.split(", ");
     if (data.length - 1 === index) {
-      return modified.push(
-        `${splitName[0]}, ${data[0]?.split(", ")[1]}`
-      );
+      return modified.push(`${splitName[0]}, ${data[0]?.split(", ")[1]}`);
     }
     const currentLastname = splitName[0];
-    const nextFirstName = data[index + 1]?.split(", ")[1]
+    const nextFirstName = data[index + 1]?.split(", ")[1];
     return modified.push(`${currentLastname}, ${nextFirstName}`);
   });
   return modified.slice(0, size);
@@ -135,9 +134,26 @@ const run = (data: string[]) => {
   };
 };
 
-// start the Express server
-app.listen(port, async () => {
-  console.log(`server started at http://localhost:${port}`);
+const parser = {
+  unique: {
+    first: getUniqueFirstNames,
+    last: getUniqueLastNames,
+    names: getUniqueNames,
+    specifically: getSpecificallyUnique,
+    modified: getUniqueModified,
+  },
+  top: {
+    first: getTopTenFirstNames,
+    last: getTopTenLastNames,
+  },
+};
+
+const startProgram = async () => {
+  console.log(`Actor Name Parser started at http://localhost:${port}`);
   const data: string[] = await readAndParseFile("../data.txt");
   console.log(run(data));
-});
+};
+
+startProgram();
+
+export default parser;
