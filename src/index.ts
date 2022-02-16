@@ -8,6 +8,9 @@ const port = 8080; // default port to listen
 const onlyUnique = (value: any, index: any, self: any) =>
   self.indexOf(value) === index;
 
+const onlyNotUnique = (value: any, index: any, self: any) =>
+  self.indexOf(value) !== index;
+
 const readAndParseFile = async (filePath: string) => {
   try {
     const file = await fs.readFileSync(
@@ -91,8 +94,26 @@ const getTopTenFirstNames = (data: string[]) => {
   return firstNamesArr.slice(0, 10);
 };
 
-const getSpecificallyUnique = (data: string[], size: number) =>
-  data.slice(0, size);
+const getSpecificallyUnique = (data: string[], size: number) => {
+  const allNames: string[] = [];
+  const dataSlice = data.slice(0, size);
+  dataSlice.map((name: string) => {
+    const [f, l] = name.split(", ");
+    allNames.push(f);
+    allNames.push(l);
+  });
+  const allNotUniqueNames: string[] = allNames.filter(onlyNotUnique);
+  const filteredData = dataSlice.filter((name: string) => {
+    const [f, l] = name.split(", ");
+    if(name === "McGlynn, Katrina"){
+      debugger
+    }
+    if(!allNotUniqueNames.includes(f) && !allNotUniqueNames.includes(l)){
+      return name;
+    }
+  });
+  return filteredData;
+};
 
 const getUniqueModified = (data: string[], size: number) => {
   const modified: string[] = [];
