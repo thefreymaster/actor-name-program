@@ -105,10 +105,7 @@ const getSpecificallyUnique = (data: string[], size: number) => {
   const allNotUniqueNames: string[] = allNames.filter(onlyNotUnique);
   const filteredData = dataSlice.filter((name: string) => {
     const [f, l] = name.split(", ");
-    if(name === "McGlynn, Katrina"){
-      debugger
-    }
-    if(!allNotUniqueNames.includes(f) && !allNotUniqueNames.includes(l)){
+    if (!allNotUniqueNames.includes(f) && !allNotUniqueNames.includes(l)) {
       return name;
     }
   });
@@ -145,8 +142,8 @@ const run = (data: string[]) => {
       firstNames: uniqueFirstNames?.length,
     },
     top: {
-      lastNames: topTenLastNames,
-      firstNames: topTenFirstNames,
+      lastNames: JSON.stringify(topTenLastNames),
+      firstNames: JSON.stringify(topTenFirstNames),
     },
     list: {
       specifically: uniqueSpecificially,

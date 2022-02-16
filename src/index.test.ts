@@ -15,13 +15,27 @@ test("getUniqueLastNames", () => {
   expect(parser.unique.last(names)).toStrictEqual(["Frey", "Butler"]);
 });
 
-// test("getSpecificallyUnique", () => {
-//   const names = [
-//     "Frey, Evan",
-//     "Butler, Liz",
-//     "Evan, Frey",
-//     "Troy, Butler",
-//     "Lola, Miller",
-//   ];
-//   expect(parser.unique.specifically(names, 5)).toStrictEqual(["Lola, Miller"]);
-// });
+test("getSpecificallyUnique", () => {
+  const names = [
+    "Frey, Evan",
+    "Butler, Liz",
+    "Evan, Frey",
+    "Troy, Butler",
+    "Lola, Miller",
+  ];
+  expect(parser.unique.specifically(names, 5)).toStrictEqual(["Lola, Miller"]);
+});
+
+test("getUniqueModified", () => {
+  const names = [
+    "Frey, Evan",
+    "Butler, Liz",
+    "Evan, Frey",
+    "Troy, Butler",
+    "Lola, Miller",
+    "Rudy, Tiller",
+  ];
+  expect(
+    parser.unique.modified(parser.unique.specifically(names, 6), 6)
+  ).toStrictEqual(["Lola, Tiller", "Rudy, Miller"]);
+});
