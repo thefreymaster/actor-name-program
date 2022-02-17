@@ -21,3 +21,9 @@ Run tests for program
 ```
 npm run test
 ```
+
+### Expected Output
+The expected output can be found in 
+```
+output.json
+```
