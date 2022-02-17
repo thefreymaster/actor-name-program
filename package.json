@@ -1,7 +1,7 @@
 {
   "name": "actor-name-program",
   "version": "1.0.0",
-  "description": "yesware code challenge Evan Freymiller",
+  "description": "actor-name-program Evan Freymiller",
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
