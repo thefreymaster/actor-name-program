@@ -1,9 +1,5 @@
-import express from "express";
 import fs from "fs";
 import path from "path";
-
-const app = express();
-const port = 8080; // default port to listen
 
 const onlyUnique = (value: any, index: any, self: any) =>
   self.indexOf(value) === index;
@@ -29,7 +25,7 @@ const readAndParseFile = async (filePath: string) => {
 };
 
 const getUniqueNames = (data: string[]) => {
-  return data.filter(onlyUnique);
+  return data?.filter(onlyUnique);
 };
 
 const getUniqueLastNames = (data: string[]) => {
@@ -67,7 +63,10 @@ const getTopTenLastNames = (data: string[]) => {
       name: key,
       count: value,
     }))
-    .sort(function (a: any, b: any) {
+    .sort(function (
+      a: { name: string; count: number },
+      b: { name: string; count: number }
+    ) {
       return b.count - a.count;
     });
   return lastNamesArr.slice(0, 10);
@@ -88,7 +87,10 @@ const getTopTenFirstNames = (data: string[]) => {
       name: key,
       count: value,
     }))
-    .sort(function (a: any, b: any) {
+    .sort(function (
+      a: { name: string; count: number },
+      b: { name: string; count: number }
+    ) {
       return b.count - a.count;
     });
   return firstNamesArr.slice(0, 10);
@@ -167,7 +169,7 @@ const parser = {
 };
 
 const startProgram = async () => {
-  console.log(`Actor Name Parser started at http://localhost:${port}`);
+  console.log(`Actor Name Parser running...`);
   const data: string[] = await readAndParseFile("../data.txt");
   console.log(run(data));
 };
